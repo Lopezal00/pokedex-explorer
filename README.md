@@ -1,13 +1,13 @@
 PokéDex Explorer
 
-App móvil hecha con React Native y Expo (SDK 57) que consume la PokéAPI. Lista Pokémon con scroll infinito, permite buscarlos por nombre o número y muestra su ficha con imagen, tipos, altura, peso y estadísticas.
+App móvil hecha con React Native y Expo (SDK 58) que consume la PokéAPI. Lista Pokémon con scroll infinito, permite buscarlos por nombre o número y muestra su ficha con imagen, tipos, altura, peso y estadísticas.
 
 Cómo correr el proyecto
 bash
 npm install
 npx expo start
 
-Escanea el código QR con Expo Go (versión compatible con SDK 57).
+Escanea el código QR con Expo Go (versión compatible con SDK 58).
 
 Estructura de carpetas
 pokedex-explorer/
