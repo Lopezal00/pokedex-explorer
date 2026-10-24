@@ -58,6 +58,16 @@ Endpoint	Uso
 GET /pokemon?limit=20&offset={m}	Lista paginada
 GET /pokemon/{nombre o id}	Ficha de un Pokémon
 
+## Capturas
+
+| Lista | Ficha | Cargando |
+|---|---|---|
+| <img src="capturas/lista.png" width="220"> | <img src="capturas/ficha.png" width="220"> | <img src="capturas/cargando.png" width="220"> |
+
+| Error | Sin resultados |
+|---|---|
+| <img src="capturas/error.png" width="220"> | <img src="capturas/sin-resultados.png" width="220"> |
+
 REFLEXIÓN:
 
 Cómo nos fue en el desarrollo?

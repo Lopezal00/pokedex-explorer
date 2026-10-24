@@ -1,6 +1,7 @@
 // Estados reutilizables de la interfaz: cargando, error y vacío.
 // Lo van usar tanto la lista como la ficha de detalle.
-import { ActivityIndicator, Button, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import AppButton from './AppButton';
 
 // CONCEPTO: estados de interfaz (cargando / error / vacío / éxito)
 // Uso: <StatusView status="loading" />  |  <StatusView status="error" onRetry={reload} />
@@ -23,7 +24,7 @@ export default function StatusView({ status, message, onRetry }) {
         <Text style={styles.text}>
           {message ?? 'No pudimos conectarnos. Revisa tu conexión a internet.'}
         </Text>
-        {onRetry && <Button title="Reintentar" onPress={onRetry} color="#E3350D" />}
+        {onRetry && <AppButton title="Reintentar" onPress={onRetry} color="#E3350D" />}
       </View>
     );
   }

@@ -1,10 +1,11 @@
 // Vista de lista: título, buscador, cuadrícula de 2 columnas y scroll infinito.
 // Junta el hook (lógica) con los componentes (interfaz).
 
-import { ActivityIndicator, Button, FlatList, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator,FlatList, StyleSheet, Text, View } from 'react-native';
 import PokemonCard from '../components/PokemonCard';
 import StatusView from '../components/StatusView';
 import usePokemonList from '../hooks/usePokemonList';
+import AppButton from '../components/AppButton';
 
 //header : el buscador  que se pasa desde APP.JS
 
@@ -25,7 +26,7 @@ export default function ListScreen({onSelectPokemon, header}){
             return(
                 <View style={styles.footer}>
                     <Text style={styles.footerText}>No se puedieron cargar más Pokemones. </Text>
-                    <Button title='Reintentar' onPress={retry} color="#E3350D"/>
+                    <AppButton title='Reintentar' onPress={retry} color="#E3350D"/>
                 </View>
             );
         }
