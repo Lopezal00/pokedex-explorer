@@ -1,11 +1,12 @@
 // Vista de detalle: imagen grande, nombre, número, tipos, medidas y estadísticas.
-import { Button, Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import {Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import StatBar from '../components/StatBar';
 import StatusView from '../components/StatusView';
 import TypeBadge from '../components/TypeBadge';
 import { DEFAULT_TYPE_COLOR, TYPE_COLORS } from '../constants/typeColors';
 import usePokemonDetail from '../hooks/usePokemonDetail';
 import { capitalize, formatId } from '../utils/format';
+import AppButton from '../components/AppButton';
 
 // query: nombre o número que viene de la tarjeta o del buscador
 export default function DetailScreen({ query, onBack }) {
@@ -30,8 +31,10 @@ export default function DetailScreen({ query, onBack }) {
     content = (
       <ScrollView contentContainerStyle={styles.content}>
         {/* CONCEPTO: Image remota con width y height explícitos */}
-        <View style={[styles.imageBox, { backgroundColor: `${mainColor}22` }]}>
-          <Image source={{ uri: pokemon.image }} style={styles.image} resizeMode="contain" />
+        <View style={styles.imageCard}>
+          <View style={[styles.imageBox,{backgroundColor: `${mainColor}22`}]}>
+            <Image source={{ uri: pokemon.image }} style={styles.image} resizeMode="contain" />
+          </View>
         </View>
 
         <Text style={styles.number}>{formatId(pokemon.id)}</Text>
@@ -43,7 +46,7 @@ export default function DetailScreen({ query, onBack }) {
           ))}
         </View>
 
-        <View style={styles.measures}>
+        <View style={[styles.card,styles.measures]}>
           <View style={styles.measure}>
             <Text style={styles.measureValue}>{pokemon.heightM} m</Text>
             <Text style={styles.measureLabel}>Altura</Text>
@@ -55,7 +58,7 @@ export default function DetailScreen({ query, onBack }) {
         </View>
 
         <Text style={styles.sectionTitle}>Estadísticas base</Text>
-        <View style={styles.stats}>
+        <View style={[styles.card,styles.stats]}>
           {pokemon.stats.map((stat) => (
             <StatBar key={stat.name} name={stat.name} value={stat.value} color={mainColor} />
           ))}
@@ -68,7 +71,7 @@ export default function DetailScreen({ query, onBack }) {
     <View style={styles.container}>
       {content}
       <View style={styles.backButton}>
-        <Button title="Volver a la lista" onPress={onBack} color="#E3350D" />
+        <AppButton title="Volver a la lista" onPress={onBack}/>
       </View>
     </View>
   );
@@ -83,21 +86,44 @@ const styles = StyleSheet.create({
     padding: 16,
     paddingBottom: 24,
   },
-  imageBox: {
+  // Sombra suave (iOS usa shadow*, Android usa elevation).
+  // La sombra va en una tarjeta blanca porque en iOS no se ve sobre fondos transparentes.
+  imageCard: {
     width: '100%',
+    borderRadius: 24,
+    backgroundColor: '#FFFFFF',
+    shadowColor: '#000000',
+    shadowOpacity: 0.1,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 4,
+  },
+  imageBox: {
     alignItems: 'center',
-    borderRadius: 20,
+    borderRadius: 24,
     paddingVertical: 16,
+  },
+  card: {
+    width: '100%',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    padding: 16,
+    shadowColor: '#000000',
+    shadowOpacity: 0.06,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 2,
   },
   image: {
     width: 220,
     height: 220,
   },
   number: {
-    marginTop: 12,
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#888888',
+    marginTop: 16,
+    fontSize: 22,
+    fontWeight: 'bold',
+    letterSpacing: 1,
+    color: '#B5B5B5',
   },
   name: {
     fontSize: 30,
@@ -111,7 +137,7 @@ const styles = StyleSheet.create({
   },
   measures: {
     flexDirection: 'row',
-    gap: 40,
+    justifyContent: 'space-around',
     marginTop: 20,
   },
   measure: {
@@ -140,7 +166,9 @@ const styles = StyleSheet.create({
   },
   backButton: {
     padding: 12,
+    paddingBottom: 28,
     borderTopWidth: 1,
     borderTopColor: '#EEEEEE',
+    backgroundColor: '#FFFFFF',
   },
 });
